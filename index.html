@@ -229,8 +229,10 @@ button:disabled {
 </head>
 <body>
 
-  <audio id="bingoSound" src="bingo.mp3" preload="auto"></audio>
-  <audio id="shuffleSound" src="spinner.mp3" preload="auto" loop></audio>
+  <!--เอาเสียงเข้า-->
+  <audio id="bingoSound" src="sounds/bingo.mp3" preload="auto"></audio>
+  <audio id="shuffleSound" src="sounds/spinner.mp3" preload="auto" loop></audio>
+  <audio id="stopSound" src="sounds/stop.mp3" preload="auto"></audio>
   
   <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
 
@@ -472,7 +474,7 @@ button:disabled {
           if (running || images.length===0) return;
      stopBtn.classList.add('stop-highlight');
 
-  // เล่นเสียงสุ่ม (ลูป)
+    // เล่นเสียง(ลูป)
     const shuffle = document.getElementById('shuffleSound');
         if (shuffle) {
         shuffle.currentTime = 0;
@@ -505,6 +507,12 @@ button:disabled {
       shuffle.pause();
       shuffle.currentTime = 0;
     }
+      // เล่นเสียงตอนหยุด
+      const stopSound = document.getElementById('stopSound');
+      if (stopSound) {
+      stopSound.currentTime = 0;
+      stopSound.play().catch(()=>{});
+  }
       if (typeof showPopup !== 'boolean') showPopup = true;
 
       const showingSrc = getCurrentShowingSrc();
@@ -676,6 +684,7 @@ button:disabled {
   </script>
 </body>
 </html>
+
 
 
 
