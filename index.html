@@ -230,6 +230,7 @@ button:disabled {
 <body>
 
   <audio id="bingoSound" src="bingo.mp3" preload="auto"></audio>
+  <audio id="shuffleSound" src="spinner.mp3" preload="auto" loop></audio>
   
   <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
 
@@ -468,6 +469,15 @@ button:disabled {
 
     // ===== Start / Stop / Reset =====
     function start(){
+          if (running || images.length===0) return;
+     stopBtn.classList.add('stop-highlight');
+
+  // เล่นเสียงสุ่ม (ลูป)
+    const shuffle = document.getElementById('shuffleSound');
+        if (shuffle) {
+        shuffle.currentTime = 0;
+        shuffle.play().catch(()=>{});
+        }
       if (running || images.length===0) return;
       stopBtn.classList.add('stop-highlight');
 
@@ -489,6 +499,12 @@ button:disabled {
     }
 
     function stop(showPopup=true){
+
+      const shuffle = document.getElementById('shuffleSound');
+      if (shuffle) {
+      shuffle.pause();
+      shuffle.currentTime = 0;
+    }
       if (typeof showPopup !== 'boolean') showPopup = true;
 
       const showingSrc = getCurrentShowingSrc();
@@ -660,6 +676,8 @@ button:disabled {
   </script>
 </body>
 </html>
+
+
 
 
 
